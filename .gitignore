@@ -1,0 +1,4 @@
+dist/
+launcher/bin/
+*.exe
+*.zip
