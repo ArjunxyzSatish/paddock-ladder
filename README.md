@@ -26,7 +26,7 @@ You need Windows 10 or 11, the original Assetto Corsa and [Custom Shaders Patch]
 2. Drag it onto the Content Manager window and click **Install**. Without Content Manager, unzip it into your game folder.
 3. Run `PaddockLadder.exe` from `apps\lua\PaddockLadder` in your game folder. A desktop shortcut is handy.
 
-**About the Windows warning:** the program isn't code-signed yet, so Windows may say it's from an unknown publisher. Click **More info**, then **Run anyway**. You can read every line of the source here, and check the [VirusTotal scan of the 2.20.0 exe](https://www.virustotal.com/gui/file/80ac43b3af80c9e7f9a27c40d7a4f88221e422210c1d0316de1aa8af183278fd).
+**About the Windows warning:** the program isn't code-signed yet, so Windows may say it's from an unknown publisher. Click **More info**, then **Run anyway**. You can read every line of the source here, and each release lists a VirusTotal scan and checksum for its exe. Releases are built from this source by GitHub Actions.
 
 ## How a career works
 

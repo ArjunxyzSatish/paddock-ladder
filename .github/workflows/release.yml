@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the launcher
+        shell: powershell
+        run: .\launcher\build.ps1
+      - name: Pack the zip
+        shell: powershell
+        run: python tools\make_release.py $env:GITHUB_REF_NAME.TrimStart('v')
+      - name: Publish the release
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $version = $env:GITHUB_REF_NAME.TrimStart('v')
+          $sha = (Get-FileHash dist\PaddockLadder.exe -Algorithm SHA256).Hash.ToLowerInvariant()
+          $notes = @"
+          **Install:** drag ``PaddockLadder-$version.zip`` onto Content Manager and click Install, then run ``PaddockLadder.exe`` from ``apps\lua\PaddockLadder`` in your game folder. Details are in the README.
+
+          **Windows warning:** this build isn't code-signed yet. [VirusTotal scan of the exe](https://www.virustotal.com/gui/file/$sha)
+
+          SHA-256 of ``PaddockLadder.exe``: ``$sha``
+          "@
+          Set-Content notes.md ($notes -replace '(?m)^\s+', '')
+          gh release create $env:GITHUB_REF_NAME "dist\PaddockLadder-$version.zip" dist\PaddockLadder.exe --title "Paddock Ladder $version" --notes-file notes.md --prerelease
