@@ -34,7 +34,6 @@ namespace PaddockLadder
             if (args.Length > 0 && args[0] == "--music-check") return SelfTest.MusicCheck(args[1]);
             if (args.Length > 0 && args[0] == "--finish-flow-setup") return SelfTest.FinishFlowSetup(args[1]);
             if (args.Length > 0 && args[0] == "--weekend-flow-setup") return SelfTest.WeekendFlowSetup(args[1]);
-            if (args.Length > 0 && args[0] == "--trailer-setup") return SelfTest.TrailerSetup(args[1], args.Length > 2);
             if (args.Length > 0 && args[0].StartsWith("--") && args[0] != "--auto-start-race")
             {
                 Console.WriteLine("Unknown test command: " + args[0]);

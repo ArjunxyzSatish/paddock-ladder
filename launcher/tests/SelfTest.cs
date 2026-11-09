@@ -936,50 +936,6 @@ namespace PaddockLadder
             return music.PositionForTest.TotalSeconds > 2 && music.DurationForTest.TotalSeconds > 150 && !music.BrokenForTest ? 0 : 1;
         }
 
-        // A driver two poor results away from the sack, racing GT3 on a short circuit.
-        public static int TrailerSetup(string acRoot, bool alreadyOnNotice)
-        {
-            var series = Engine.BuildSeries(Content.ScanCars(acRoot));
-            var tracks = Content.ScanTracks(acRoot);
-            var c = Engine.NewCareer("Alex Mercer", "ladder", -14, 1, 717171);
-            c.AutoDifficulty = false;
-            var pick = series.FirstOrDefault(s => s.Id == "gt3") ?? series.OrderByDescending(s => s.Cars.Count).First();
-            var car = pick.Cars[pick.Cars.Count / 2];
-            c.Tier = pick.Tier;
-            var offer = new Offer { SeriesId = pick.Id, SeriesName = pick.Name, Tier = pick.Tier, CarId = car.Id, CarName = car.Name, Brand = car.Brand, Skin = car.Skins[0], Pw = car.Pw, Team = "Ironbridge Racing" };
-            offer.Clauses.Add(new Clause { Kind = "finishTop", Target = 3, Text = "Finish in the top 3" });
-            offer.Clauses.Add(new Clause { Kind = "maxContacts", Target = 0, Text = "Cause no contact" });
-            c.Credits = 400000;
-            Engine.StartSeason(c, offer, series, tracks);
-            for (var i = 0; i < 2; i++) Engine.ApplyResult(c, Result(c, 14 - i * 3, 0, 0));
-            var venue = tracks.Where(t => t.Pits >= 20 && t.Name.Contains("Brands Hatch") && t.Name.Contains("Indy")).FirstOrDefault() ?? tracks.Where(t => t.Pits >= 20).OrderBy(t => t.Km).First();
-            foreach (var round in c.Season.Rounds.Skip(c.Season.RoundIndex))
-            {
-                round.Track = venue.Id;
-                round.Layout = venue.Layout;
-                round.TrackName = venue.Name;
-                round.Km = venue.Km;
-                round.Weather = "3_clear";
-                round.WeatherSlots = new List<int> { 15, 15, 15, 15 };
-                round.CustomLaps = 1;
-                round.PracticeOverride = -1;
-                round.QualifyingOverride = -1;
-            }
-            c.Season.Trust = alreadyOnNotice ? 20 : 35;
-            c.Season.OnNotice = alreadyOnNotice;
-            c.Season.NoticeTrust = 20;
-            c.Season.Released = false;
-            c.Pace = 92;
-            c.Clean = 88;
-            c.LastSeasonScore = 0.9;
-            c.LicencePoints = 0;
-            c.Credits = 240000;
-            Store.SaveCareer(c);
-            Store.SetActiveCareer(c.Id);
-            Console.WriteLine("Saved {0}: {1} at {2}", c.Driver, car.Name, venue.Name);
-            return 0;
-        }
-
         // A full weekend on the shortest track with one-minute sessions, for run-weekend-test.ps1.
         public static int WeekendFlowSetup(string acRoot)
         {
