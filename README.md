@@ -90,14 +90,14 @@ This program will not transfer any information to other networked systems unless
 
 ## Code signing policy
 
-Releases aren't code-signed yet. The project is applying to the SignPath Foundation's free programme for open-source software. Once it's accepted, signed releases will carry this credit:
+Releases aren't code-signed yet. The SignPath Foundation's free programme for open-source software looks for projects with an established public following, so Paddock Ladder will apply again once it's better known. If it's accepted, signed releases will carry this credit:
 
 Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org)
 
 - Committers and reviewers: [Arjun Satish](https://github.com/ArjunxyzSatish)
 - Approvers: [Arjun Satish](https://github.com/ArjunxyzSatish)
 
-Every release is built from this repository by GitHub Actions, and each signing request will be approved by hand.
+Every release is built from this repository by GitHub Actions. Any future signing request will be approved by hand.
 
 ## Building from source
 
