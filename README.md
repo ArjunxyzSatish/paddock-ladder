@@ -22,7 +22,7 @@ Plenty of mods give Assetto Corsa a progression system. Paddock Ladder is built 
 
 You need Windows 10 or 11, the original Assetto Corsa and [Custom Shaders Patch](https://acstuff.club/patch/). [Content Manager](https://assettocorsa.club/content-manager.html) is recommended. Development and testing used CSP 0.3.0-preview342, and other versions are untested.
 
-1. Download `PaddockLadder-2.20.0.zip` from [Releases](../../releases).
+1. Download `PaddockLadder-2.20.1.zip` from [Releases](../../releases).
 2. Drag it onto the Content Manager window and click **Install**. Without Content Manager, unzip it into your game folder.
 3. Run `PaddockLadder.exe` from `apps\lua\PaddockLadder` in your game folder. A desktop shortcut is handy.
 

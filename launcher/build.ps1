@@ -24,7 +24,22 @@ $resources = @(
   "/resource:$project\src\fault.lua,game/src/fault.lua"
 )
 
-$sources = @(Get-ChildItem "$here\src\*.cs" | ForEach-Object { $_.FullName })
+# The exe's file properties, kept in step with the version in manifest.ini.
+$version = ((Get-Content "$project\manifest.ini" | Where-Object { $_ -match '^\s*VERSION\s*=' }) -split '=')[1].Trim()
+$info = Join-Path $here 'bin\AssemblyInfo.cs'
+New-Item -ItemType Directory -Force (Split-Path $info -Parent) | Out-Null
+Set-Content -Encoding UTF8 $info @"
+using System.Reflection;
+[assembly: AssemblyTitle("Paddock Ladder")]
+[assembly: AssemblyDescription("Career mode launcher for Assetto Corsa")]
+[assembly: AssemblyCompany("Arjun Satish")]
+[assembly: AssemblyProduct("Paddock Ladder")]
+[assembly: AssemblyCopyright("Copyright (c) 2026 Arjun Satish")]
+[assembly: AssemblyVersion("$version.0")]
+[assembly: AssemblyFileVersion("$version.0")]
+"@
+
+$sources = @(Get-ChildItem "$here\src\*.cs" | ForEach-Object { $_.FullName }) + $info
 $options = @('/nologo', '/optimize+', "/out:$out", "/win32icon:$here\icon.ico")
 if ($Test) {
   $sources += @(Get-ChildItem "$here\tests\*.cs" | ForEach-Object { $_.FullName })
