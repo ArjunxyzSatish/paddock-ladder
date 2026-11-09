@@ -26,7 +26,7 @@ You need Windows 10 or 11, the original Assetto Corsa and [Custom Shaders Patch]
 2. Drag it onto the Content Manager window and click **Install**. Without Content Manager, unzip it into your game folder.
 3. Run `PaddockLadder.exe` from `apps\lua\PaddockLadder` in your game folder. A desktop shortcut is handy.
 
-**About the Windows warning:** the program isn't code-signed yet, so Windows may say it's from an unknown publisher. Click **More info**, then **Run anyway**. You can read every line of the source here, and each release lists a VirusTotal scan and checksum for its exe. Releases are built from this source by GitHub Actions.
+**About the Windows warning:** the program isn't code-signed yet (see the [code signing policy](#code-signing-policy)), so Windows may say it's from an unknown publisher. Click **More info**, then **Run anyway**. You can read every line of the source here, and each release lists a VirusTotal scan and checksum for its exe. Releases are built from this source by GitHub Actions.
 
 ## How a career works
 
@@ -65,6 +65,39 @@ Repair parts one at a time, or only halfway. Damage stays on the car through pra
 - With the Pure weather mod installed, each race has four weather stages. Paddock Ladder never includes Pure's files.
 - The launcher closes the results windows Content Manager leaves behind after each race.
 - The menu music, sounds and logo are original.
+
+## What it changes on your PC
+
+Paddock Ladder has no installer and doesn't change the Windows registry, add startup entries or create shortcuts. It only touches these places:
+
+- `apps\lua\PaddockLadder` in your game folder holds the program and the in-game app.
+- `Documents\Assetto Corsa\paddock_ladder` holds your careers and the files the launcher and game use to talk to each other.
+- `Documents\Assetto Corsa\cfg\race.ini` is rewritten before each race, as Content Manager does.
+- If you have the Pure weather mod, it adds `extension\config-ext\PurePlanner\Plans\Timed\PaddockLadder.json` to your game folder. It also switches Pure's settings file to that plan for the race, then puts your own settings back.
+
+It also starts Assetto Corsa or Content Manager, and closes the results windows Content Manager leaves open after a race.
+
+## Uninstall
+
+1. Close the launcher and the game.
+2. Delete `apps\lua\PaddockLadder` from your game folder.
+3. Delete `Documents\Assetto Corsa\paddock_ladder` to remove your careers too.
+4. If you use Pure, delete `extension\config-ext\PurePlanner\Plans\Timed\PaddockLadder.json` from your game folder.
+
+## Privacy
+
+This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
+
+## Code signing policy
+
+Releases aren't code-signed yet. The project is applying to the SignPath Foundation's free programme for open-source software. Once it's accepted, signed releases will carry this credit:
+
+Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org)
+
+- Committers and reviewers: [Arjun Satish](https://github.com/ArjunxyzSatish)
+- Approvers: [Arjun Satish](https://github.com/ArjunxyzSatish)
+
+Every release is built from this repository by GitHub Actions, and each signing request will be approved by hand.
 
 ## Building from source
 

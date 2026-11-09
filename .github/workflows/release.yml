@@ -28,7 +28,7 @@ jobs:
           $notes = @"
           **Install:** drag ``PaddockLadder-$version.zip`` onto Content Manager and click Install, then run ``PaddockLadder.exe`` from ``apps\lua\PaddockLadder`` in your game folder. Details are in the README.
 
-          **Windows warning:** this build isn't code-signed yet. [VirusTotal scan of the exe](https://www.virustotal.com/gui/file/$sha)
+          **Windows warning:** this build isn't code-signed yet. [VirusTotal scan of the exe](https://www.virustotal.com/gui/file/$sha) and [code signing policy](https://github.com/$env:GITHUB_REPOSITORY#code-signing-policy)
 
           SHA-256 of ``PaddockLadder.exe``: ``$sha``
           "@
